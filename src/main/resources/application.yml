@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: stream-demo
+  cloud:
+    stream:
+      bindings:
+#        prod-out:
+##          destination: test1 # 目的地。这里使用 RocketMQ Topic,rabbitmq里为交换机
+#          content-type: application/json # 内容格式。这里使用 JSON
+#          group: test
+#          binder: rocketmq
+        prod-out:
+          binder: rocketmq
+          group: prod-consumer-group-prod-TOPIC
+#        delay-out:
+#          # destination: delay-test # 目的地。这里使用 RocketMQ Topic
+#          content-type: application/json # 内容格式。这里使用 JSON
+#          group: test
+#          binder: rocketmq
+        delay-out:
+          # destination: delay-test # 目的地。这里使用 RocketMQ Topic
+          binder: rocketmq
+          group: prod-consumer-group-delay-TOPIC
+#        prod-in:
+##          destination: test1 # 目的地。这里使用 RocketMQ Topic
+#          content-type: application/json # 内容格式。这里使用 JSON
+#          group: prod-consumer-group-prod-TOPIC
+#          binder: rocketmq
+#        delay-in:
+##          destination: delay-test # 目的地。这里使用 RocketMQ Topic
+#          content-type: application/json # 内容格式。这里使用 JSON
+#          group: prod-consumer-group-delay-TOPIC
+#          binder: rocketmq
+      rocketmq:
+        binder:
+          name-server: 192.168.29.113:9876
