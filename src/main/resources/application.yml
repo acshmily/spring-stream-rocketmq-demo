@@ -13,7 +13,7 @@ spring:
 #          group: test
 #          binder: rocketmq
         prod-out:
-          binder: rocketmq
+          binder: rocketmq2
           group: prod-consumer-group-prod-TOPIC
 #        delay-out:
 #          # destination: delay-test # 目的地。这里使用 RocketMQ Topic
@@ -22,7 +22,7 @@ spring:
 #          binder: rocketmq
         delay-out:
           # destination: delay-test # 目的地。这里使用 RocketMQ Topic
-          binder: rocketmq
+          binder: rocketmq1
           group: prod-consumer-group-delay-TOPIC
 #        prod-in:
 ##          destination: test1 # 目的地。这里使用 RocketMQ Topic
@@ -34,6 +34,25 @@ spring:
 #          content-type: application/json # 内容格式。这里使用 JSON
 #          group: prod-consumer-group-delay-TOPIC
 #          binder: rocketmq
-      rocketmq:
-        binder:
-          name-server: 192.168.29.113:9876
+#      rocketmq:
+#        binder:
+#          name-server: 192.168.29.113:9876
+      binders:
+        rocketmq1:
+          type: rocketmq
+          environment:
+            spring:
+              cloud:
+                stream:
+                  rocketmq:
+                    binder:
+                      name-server: 192.168.29.113:9876
+        rocketmq2:
+          type: rocketmq
+          environment:
+            spring:
+              cloud:
+                stream:
+                  rocketmq:
+                    binder:
+                      name-server: 192.168.29.111:9876
